@@ -3,6 +3,22 @@
 # and the value is a dictionary where the keys are 'email' and 'phone' and the values
 # are the corresponding email address and phone number of the customer. 
 
+import csv
+infile = open('VendorList.csv','r')
+csvfile = csv.reader(infile,delimiter=',')
+next(csvfile)
+field_names = ['Full Name','Email','Phone']
+newDict = {
+        (record[1] + ' ' + record[2]): {"email": record[4] , "phone": record[5]} for record in csvfile}
+print(newDict)
+outfile = open('marketinglistFINAL.csv','w')
+writer = csv.DictWriter(outfile, fieldnames = field_names)
+writer.writeheader()
+writer.writerows(newDict)
+outfile.close()
+
+
+
 # Once the dictionary has been completed print it out. It shoud resemble what is shown
 # below (first 2 and last 2 elements shown only):
 
@@ -20,8 +36,6 @@
 # Note: you can use the comments below to guide you through the logic of the code. You are not
 # required to follow it. ALSO NOT ALL STEPS HAVE BEEN COMMENTED. You may have additional steps.
 
-
-import csv
 
 # open the vendorlist file
 
